@@ -5,7 +5,7 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
-      brightness: Brightness.light, // <- importante
+      brightness: Brightness.light, // tema claro
     ),
   );
 
@@ -13,7 +13,7 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
-      brightness: Brightness.dark, // <- importante
+      brightness: Brightness.dark, //tema obscuro
     ),
   );
 }

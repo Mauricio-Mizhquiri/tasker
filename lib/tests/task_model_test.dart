@@ -6,7 +6,6 @@ void main() {
   late TaskController controller;
 
   setUp(() {
-    // Inicializa el controller con dependencias fake o memoria
     controller = TaskControllerFake();
   });
 

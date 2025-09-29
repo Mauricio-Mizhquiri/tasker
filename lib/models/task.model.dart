@@ -49,34 +49,5 @@ class TaskModel {
     );
   }
 
-  /// Convierte a Map para Firestore
-  Map<String, dynamic> toFirestore() => {
-        'title': title,
-        'description': description,
-        'lat': lat,
-        'lng': lng,
-        'photoPath': photoPath,
-        'audioPath': audioPath,
-        'done': done,
-        'createdAt': createdAt.toIso8601String(),
-        'synced': synced,
-      };
-
-  /// Crea un TaskModel desde un Map de Firestore
-  factory TaskModel.fromFirestore(Map<String, dynamic> map, String id) {
-    return TaskModel(
-      id: id,
-      title: map['title'] ?? '',
-      description: map['description'],
-      lat: map['lat'] != null ? (map['lat'] as num).toDouble() : null,
-      lng: map['lng'] != null ? (map['lng'] as num).toDouble() : null,
-      photoPath: map['photoPath'],
-      audioPath: map['audioPath'],
-      done: map['done'] ?? false,
-      createdAt: map['createdAt'] != null
-          ? DateTime.parse(map['createdAt'])
-          : DateTime.now(),
-      synced: map['synced'] ?? false,
-    );
-  }
+  
 }

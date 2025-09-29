@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import '../models/task.model.dart';
 import '../services/db.service.dart';
-import '../services/firestore.service.dart';
 import '../services/llm.service.dart';
 import '../services/media.service.dart';
 
@@ -16,13 +15,13 @@ class TaskController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadInitialTasks(); // solo carga tareas, no inicializa DB
+    _loadInitialTasks(); //carga tareas
   }
 
   Future<void> _loadInitialTasks() async {
     loading.value = true;
     try {
-      final list = await db.getAll(); // esto ya no llama init()
+      final list = await db.getAll();
       tasks.assignAll(list);
     } catch (e) {
       print("Error loading tasks: $e");
