@@ -12,7 +12,8 @@ class DbService {
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute('''
+        //create table
+        await db.execute(''' 
           CREATE TABLE tasks(
             id TEXT PRIMARY KEY,
             title TEXT,
@@ -29,7 +30,8 @@ class DbService {
       },
     );
   }
-
+  
+//obtner todos los task
   Future<List<TaskModel>> getAll() async {
     final rows = await db.query('tasks', orderBy: 'createdAt DESC');
     return rows.map((m) => TaskModel(
@@ -47,6 +49,7 @@ class DbService {
   }
 
   Future<void> insert(TaskModel t) async {
+    //insertar a la bd un task
     await db.insert('tasks', {
       'id': t.id.isEmpty ? const Uuid().v4() : t.id,
       'title': t.title,
@@ -61,6 +64,7 @@ class DbService {
     });
   }
 
+//modificar el task
   Future<void> update(TaskModel t) async {
     await db.update('tasks', {
       'title': t.title,
@@ -74,6 +78,7 @@ class DbService {
     }, where: 'id=?', whereArgs: [t.id]);
   }
 
+//eliminar task
   Future<void> deleteTask(String id) async {
     await db.delete('tasks', where: 'id=?', whereArgs: [id]);
   }

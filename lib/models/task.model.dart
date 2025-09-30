@@ -23,6 +23,7 @@ class TaskModel {
     this.synced = false,
   }) : createdAt = createdAt ?? DateTime.now();
 
+
   TaskModel copyWith({
     String? id,
     String? title,

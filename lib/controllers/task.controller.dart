@@ -18,6 +18,7 @@ class TaskController extends GetxController {
     _loadInitialTasks(); //carga tareas
   }
 
+//inicializa las tareas
   Future<void> _loadInitialTasks() async {
     loading.value = true;
     try {
@@ -30,11 +31,12 @@ class TaskController extends GetxController {
     }
   }
 
+//agrega taks
   Future<void> addTask(TaskModel task) async {
     await db.insert(task);
     tasks.insert(0, task);
   }
-
+//cambia estado de la tarea
   Future<void> toggleTask(int index) async {
     final t = tasks[index];
     final updated = t.copyWith(done: !t.done);
@@ -42,6 +44,7 @@ class TaskController extends GetxController {
     await db.update(updated);
   }
 
+//elimina task
   Future<void> removeTask(int index) async {
     final t = tasks.removeAt(index);
     await db.deleteTask(t.id);

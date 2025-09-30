@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
 class LlmService extends GetConnect {
-  final String _apiKey = 'sk...';
-  final String _baseUrl = 'https://api.groq.com/openai/v1';
-  static const _model = 'llama-3.1-8b-instant';
+  final String _apiKey = ''; //apikey
+  final String _baseUrl = 'https://api.groq.com/openai/v1'; 
+  static const _model = 'llama-3.1-8b-instant'; //modelo
 
   LlmService() {
     httpClient.baseUrl = _baseUrl;
@@ -14,6 +14,8 @@ class LlmService extends GetConnect {
     });
   }
 
+
+//resumir descripción
   Future<String?> summarize(String text) async {
     final response = await post('/chat/completions', {
       'model': _model,
@@ -24,18 +26,12 @@ class LlmService extends GetConnect {
       'temperature': 0.0,
       'max_tokens': 80,
     });
-
-    if (response.status.hasError) {
-      print('Error: ${response.statusCode} - ${response.statusText}');
-      print('Body: ${response.bodyString}');
-      return null;
-    }
-
     final body = response.body as Map<String, dynamic>;
     final content = body['choices']?[0]?['message']?['content'] as String?;
     return content?.trim();
   }
 
+//prompt para la IA
   static const _sysSummary = '''
 Eres un asistente que **responde siempre con máximo 1 frase**, resumiendo el texto del usuario. 
 - No repitas frases completas del texto original.

@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:geo_tasker/controllers/task.controller.dart';
+import 'package:get/get.dart';
 import 'package:geo_tasker/models/task.model.dart';
 
 void main() {
-  late TaskController controller;
+  late TaskControllerFake controller;
 
   setUp(() {
     controller = TaskControllerFake();
@@ -32,23 +32,18 @@ void main() {
 }
 
 // Controller de prueba (fake) para test en memoria
-class TaskControllerFake extends TaskController {
-  TaskControllerFake() {
-    tasks.value = [];
-  }
+class TaskControllerFake {
+  final tasks = <TaskModel>[].obs;
 
-  @override
   Future<void> addTask(TaskModel task) async {
     tasks.add(task);
   }
 
-  @override
   Future<void> toggleTask(int index) async {
     final t = tasks[index];
     tasks[index] = t.copyWith(done: !t.done);
   }
 
-  @override
   Future<void> removeTask(int index) async {
     tasks.removeAt(index);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_tasker/controllers/task.controller.dart';
+import 'package:geo_tasker/controllers/theme.controller.dart';
 import 'package:geo_tasker/services/db.service.dart';
 import 'package:geo_tasker/services/llm.service.dart';
 import 'package:geo_tasker/services/media.service.dart';
@@ -17,6 +18,7 @@ void main() async {
   Get.put(LlmService());
   Get.put(MediaService());
   Get.put(TaskController()); //controlador principal
+  Get.put(ThemeController()); //controlador del tema
   runApp(const MyApp());
 }
 
@@ -27,10 +29,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GeoTasker',
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      initialRoute: '/',
+      theme: AppTheme.light, //tema claro
+      darkTheme: AppTheme.dark, //tema obscuro
+      themeMode: ThemeMode.system, //tema por defecto
+      initialRoute: '/', //inicializa rutas
       getPages: routes,
     );
   }
